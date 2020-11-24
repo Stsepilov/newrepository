@@ -1,6 +1,5 @@
 import sys
-from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 from PyQt5.QtGui import QPainter, QColor
 from random import randint
 
@@ -8,7 +7,14 @@ from random import randint
 class Example(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.initUI()
+
+    def initUI(self):
+        self.setGeometry(300, 300, 800, 600)
+        self.setWindowTitle('Рисование')
+        self.btnspawn = QPushButton('Появление', self)
+        self.btnspawn.move(0, 577)
+        self.btnspawn.resize(800, 23)
         self.btnspawn.clicked.connect(self.on_click)
         self.btnspawn = False
 
@@ -20,8 +26,11 @@ class Example(QMainWindow):
         a = randint(30, 100)
         x = randint(100, 700)
         y = randint(100, 477)
-        qp.setBrush(QColor(255, 241, 0))
-        qp.setPen(QColor(255, 241, 0))
+        r = randint(0, 255)
+        g = randint(0, 255)
+        b = randint(0, 255)
+        qp.setBrush(QColor(r, g, b))
+        qp.setPen(QColor(r, g, b))
         qp.drawEllipse(x, y, a, a)
 
     def paintEvent(self, event):
